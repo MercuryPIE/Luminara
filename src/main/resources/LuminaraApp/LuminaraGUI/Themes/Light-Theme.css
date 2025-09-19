@@ -1,0 +1,49 @@
+.root{
+    -BackgroundColour: #E6E6E9;
+    -ButtonColour: #DC851F;
+    -ButtonTextColour: #333333;
+}
+
+.Button{
+    -fx-border-color: -ButtonColour;
+    -fx-border-radius: 10px;
+    -fx-background-radius: 10px;
+    -fx-background-color: transparent;
+    -fx-text-fill: #333333;
+    -fx-border-width: 2px;
+    -fx-font-family: Inter;
+    -fx-font-size: 16px;
+    -fx-background-insets: 0, 1;
+}
+
+.Button:hover{
+    -fx-cursor: hand;
+    -fx-text-fill:-ButtonTextColour;
+    -fx-background-color: -ButtonColour;
+}
+
+.Text{
+    -fx-text-fill: -ButtonTextColour;
+}
+.Separator{
+    -fx-background-color: -ButtonTextColour
+}
+
+.ButtonToggle{
+    -fx-border-color: #3C91E6;
+    -fx-border-radius: 100px;
+    -fx-background-radius: 100px;
+    -fx-background-color: #342E37;
+    -fx-text-fill: #F0EDEE;
+    -fx-border-width: 2px;
+    -fx-font-family: Inter;
+    -fx-font-size: 16px;
+    -fx-background-insets: 0, 1;
+    -fx-padding: 5px;
+}
+
+.ButtonToggle:hover{
+    -fx-cursor: hand;
+    -fx-text-fill: #F0EDEE;
+    -fx-background-color: #3C91E6;
+}

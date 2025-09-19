@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<VBox alignment="CENTER" prefHeight="400.0" prefWidth="700.0" style="-fx-background-color: -BackgroundColour;" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="LuminaraApp.LuminaraGUI.MainController">
+   <children>
+      <VBox alignment="CENTER_LEFT" maxHeight="700.0" maxWidth="400.0" spacing="10.0">
+         <children>
+            <StackPane>
+               <children>
+                  <Label styleClass="Text" text="Luminara" textFill="WHITE">
+                     <font>
+                        <Font size="32.0" />
+                     </font>
+                     <graphic>
+                        <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@Icons/Luminara-Main-Icon.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Label>
+                  <Label alignment="CENTER" layoutX="31.0" styleClass="Text" text="Beta 1.2" StackPane.alignment="BOTTOM_RIGHT">
+                     <font>
+                        <Font name="Inter Italic" size="12.0" />
+                     </font>
+                  </Label>
+               </children>
+            </StackPane>
+            <Separator prefWidth="200.0" styleClass="Separator" />
+            <VBox spacing="10.0">
+               <children>
+                  <Button fx:id="SelectFileButton" maxWidth="1.7976931348623157E308" minWidth="100.0" mnemonicParsing="false" onAction="#HandleSelectFile" styleClass="Button" text="Select File">
+                     <font>
+                        <Font name="System Bold" size="13.0" />
+                     </font>
+                  </Button>
+                  <HBox spacing="10.0">
+                     <children>
+                        <Button fx:id="ConvertFileButton" disable="true" maxWidth="1.7976931348623157E308" minWidth="100.0" mnemonicParsing="false" onAction="#HandleSaveFile" styleClass="Button" text="Save File" HBox.hgrow="ALWAYS">
+                           <font>
+                              <Font name="System Bold" size="13.0" />
+                           </font>
+                        </Button>
+                        <Button fx:id="SaveSettingsButton" disable="true" mnemonicParsing="false" styleClass="Button" text="⚙" HBox.hgrow="ALWAYS" managed="false">
+                           <font>
+                              <Font size="63.0" />
+                           </font>
+                        </Button>
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+            <Region prefHeight="30.0" />
+            <Button fx:id="SwitchThemeButton" alignment="BOTTOM_LEFT" mnemonicParsing="false" onAction="#HandleThemeButton" styleClass="ButtonToggle">
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets></Button>
+         </children>
+      </VBox>
+   </children>
+</VBox>
