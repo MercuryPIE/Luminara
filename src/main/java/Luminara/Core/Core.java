@@ -1,4 +1,4 @@
-package LuminaraApp.LuminaraCore;
+package Luminara.Core;
 
 import javafx.scene.control.Alert;
 

@@ -1,4 +1,4 @@
-package LuminaraApp.LuminaraCore;
+package Luminara.Core;
 
 public class VideoManager {
     public static int CalculateVideoLength(int[] Dimension, int TargetFPS, int PixelsPerFrame){

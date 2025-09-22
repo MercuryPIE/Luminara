@@ -1,47 +1,29 @@
-package LuminaraApp.LuminaraGUI;
+package Luminara.GUI;
 
-import LuminaraApp.LuminaraCore.Core;
-import LuminaraApp.LuminaraCore.ThemeManager;
+import Luminara.Core.Core;
 import javafx.fxml.FXML;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.Objects;
 
 public class MainController {
 
     @FXML
-    private Button SelectFileButton, ConvertFileButton, SwitchThemeButton, SaveSettingsButton;
+    private Button SelectFileButton, ConvertFileButton, SaveSettingsButton;
 
     private File ExtractFile;
-    private ImageView ThemeIcon, SettingsIcon;
+    private ImageView SettingsIcon;
 
     @FXML
     public void initialize(){
-        ThemeIcon = new ImageView();
-        UpdateButtonIcon();
         SaveSettingsButton.setDisable(true);
     }
 
-    private void UpdateButtonIcon(){
 
-        String ThemeIconPath = ThemeManager.LoadTheme() ? "Icons/Light-Mode-Icon.png" : "Icons/Dark-Mode-Icon.png";
-
-        ThemeIcon.setImage(new Image(Objects.requireNonNull(LuminaraApp.class.getResourceAsStream(ThemeIconPath))));
-
-        ThemeIcon.setFitHeight(24);
-        ThemeIcon.setFitWidth(24);
-
-        ThemeIcon.setPreserveRatio(true);
-
-        SwitchThemeButton.setGraphic(ThemeIcon);
-    }
 
     @FXML
     private void HandleSelectFile(){
@@ -57,12 +39,6 @@ public class MainController {
         }
     }
 
-    @FXML
-    private void HandleThemeButton(){
-        Scene scene = SwitchThemeButton.getScene();
-        ThemeManager.ToggleTheme(scene);
-        UpdateButtonIcon();
-    }
 
     @FXML
     private void HandleSaveFile(){
