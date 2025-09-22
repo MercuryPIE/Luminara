@@ -27,6 +27,7 @@ jobs:
         run: mvn clean javafx:jlink # add the porfile for the cli when needed
 
       - name: Create output folder
+        shell: bash
         run: |
           if [[ "$RUNNER_OS" == "Windows" ]]; then
             rename target/app.zip target/Luminara-${{ matrix.os }}-${{ github.event.inputs.release_version }}.zip
