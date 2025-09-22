@@ -27,7 +27,7 @@ jobs:
       - name: Build jlink runtime
         run: mvn clean javafx:jlink # add the porfile for the cli when needed
 
-      - uses: actions/upload-artifact@v3
+      - uses: actions/upload-artifact@v4
         with:
           name: Luminara-GUI-${{ matrix.os }}
           path: Luminara-${{ matrix.os }}-${{ github.event.inputs.release_version }}.zip
@@ -35,12 +35,12 @@ jobs:
   release-upload:
     name: Create release and upload the GUI artifacts
     needs: gui-build
-    runs-on: unbuntu-latest
+    runs-on: ubuntu-latest
     steps:
-      - uses: actions/checout@v3
+      - uses: actions/checkout@v3
 
       - name: Download GUI atrifacts
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           path: artifacts
           
