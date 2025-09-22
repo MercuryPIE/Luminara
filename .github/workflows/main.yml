@@ -27,9 +27,13 @@ jobs:
         run: mvn clean javafx:jlink # add the porfile for the cli when needed
 
       - name: Create output folder
-        run: pwd
-
-        
+        run: |
+          if [[ "$RUNNER_OS" == "Windows" ]]; then
+            rename target/app.zip target/Luminara-${{ matrix.os }}-${{ github.event.inputs.release_version }}.zip
+          else
+            mv target/app.zip target/Luminara-${{ matrix.os }}-${{ github.event.inputs.release_version }}.zip
+          fi
+          
       - uses: actions/upload-artifact@v4
         with:
           name: Luminara-GUI-${{ matrix.os }}
