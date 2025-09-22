@@ -1,4 +1,6 @@
 name: Build & Release Luminara GUI
+permissions:
+  contents: write
 
 on:
   workflow_dispatch:
