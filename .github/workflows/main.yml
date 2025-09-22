@@ -3,7 +3,7 @@ name: Build & Release Luminara GUI
 on:
   workflow_dispatch:
     inputs:
-      relsase_version:
+      release_version:
         description: 'Version for release'
         required: true
         default: 'v0.0.1'
@@ -18,15 +18,12 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
-
       - uses: actions/setup-java@v5.0.0
         with:
           java-version: 25
           distribution: oracle
-    
       - name: Build jlink runtime
         run: mvn clean javafx:jlink # add the porfile for the cli when needed
-
       - uses: actions/upload-artifact@v4
         with:
           name: Luminara-GUI-${{ matrix.os }}
