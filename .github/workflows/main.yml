@@ -37,7 +37,7 @@ jobs:
       - uses: actions/upload-artifact@v4
         with:
           name: Luminara-GUI-${{ matrix.os }}
-          path: Luminara-${{ matrix.os }}-${{ github.event.inputs.release_version }}.zip
+          path: target/Luminara-${{ matrix.os }}-${{ github.event.inputs.release_version }}.zip
 
   release-upload:
     name: Create release and upload the GUI artifacts
