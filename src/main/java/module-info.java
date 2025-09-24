@@ -1,4 +1,4 @@
-module com.example.luminaragui {
+module win.bitforge {
     requires javafx.controls;
     requires javafx.fxml;
     requires java.desktop;

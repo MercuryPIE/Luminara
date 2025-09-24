@@ -17,8 +17,7 @@ public class Core {
 
         if (FileSize == 0){
             System.out.println("File is too small, please select another file.");
-            DisplayAlert("File To Small", "The File is Too small",
-                    "the file you have selected is too small, please select a file larger", Alert.AlertType.INFORMATION);
+            DisplayAlert();
             return 1;
         }
 
@@ -71,11 +70,11 @@ public class Core {
         return new int[]{ImageWidth, ImageHeight};
     }
 
-    private static void DisplayAlert(String Title, String HeaderText, String ContentText, Alert.AlertType Type){
-        Alert alert = new Alert(Type);
-        alert.setTitle(Title);
-        alert.setHeaderText(HeaderText);
-        alert.setContentText(ContentText);
+    private static void DisplayAlert(){
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("File To Small");
+        alert.setHeaderText("The File is Too small");
+        alert.setContentText("the file you have selected is too small, please select a file larger");
         alert.showAndWait();
     }
 

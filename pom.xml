@@ -4,8 +4,8 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.example</groupId>
-    <artifactId>LuminaraGUI</artifactId>
+    <groupId>win.bitforge</groupId>
+    <artifactId>Luminara</artifactId>
     <version>1.2.0-Beta</version>
     <name>Luminara-GUI</name>
 
@@ -60,10 +60,10 @@
                         <!-- Default configuration for running with: mvn clean javafx:run -->
                         <id>default-cli</id>
                         <configuration>
-                            <mainClass>com.example.luminaragui/Luminara.GUI.RunApp</mainClass>
-                            <launcher>app</launcher>
-                            <jlinkZipName>app</jlinkZipName>
-                            <jlinkImageName>app</jlinkImageName>
+                            <mainClass>${project.artifactId}.GUI.RunApp</mainClass>
+                            <launcher>${project.name}</launcher>
+                            <jlinkZipName>${project.name}-${project.version}</jlinkZipName>
+                            <jlinkImageName>LuminaraRuntime</jlinkImageName>
                             <noManPages>true</noManPages>
                             <stripDebug>true</stripDebug>
                             <noHeaderFiles>true</noHeaderFiles>
