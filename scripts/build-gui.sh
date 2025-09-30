@@ -19,9 +19,6 @@ case "$OS_NAME" in
   *)  OS=unknown; ICON=""; MAC_ID="";;
 esac
 
-
-
-
 # Package into an app.
 jpackage \
     --name Luminara \
@@ -35,13 +32,19 @@ jpackage \
 
 cd ./GUI/target/installer
 
+case "$OS" in
+  linux) APP_DIR="Luminara";;
+  windows) APP_DIR="Luminara";;
+  macos) APP_DIR="Luminara.app"
+
+
 # Zip/Tar app.
 if [[ "$OS" == "windows" ]]; then
   ARCH_NAME="Luminara-${OS}-${RELEASE_VERSION}.zip"
-  zip -r "$ARCH_NAME" Luminara
+  zip -r "$ARCH_NAME" "$APP_DIR"
 else
   ARCH_NAME="Luminara-${OS}-${RELEASE_VERSION}.tar.gz"
-  tar -czf "$ARCH_NAME" Luminara
+  tar -czf "$ARCH_NAME" "$APP_DIR"
 fi
 
 echo "build_path=GUI/target/installer/$ARCH_NAME" >> $GITHUB_ENV
