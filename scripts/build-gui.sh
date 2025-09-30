@@ -35,7 +35,8 @@ cd ./GUI/target/installer
 case "$OS" in
   linux) APP_DIR="Luminara";;
   windows) APP_DIR="Luminara";;
-  macos) APP_DIR="Luminara.app"
+  macos) APP_DIR="Luminara.app";;
+esac
 
 
 # Zip/Tar app.
