@@ -4,10 +4,13 @@ set -e
 
 RELEASE_VERSION=${1:-1.2.1}
 
-# build the JLink image
-mvn clean install -pl GUI -am javafx:jlink
+# Install moduals to local repo. 
+mvn install
 
-# Package into an app
+# Build the JLink image.
+mvn clean -pl GUI javafx:jlink
+
+# Package into an app.
 jpackage \
     --name Luminara \
     --app-version "$RELEASE_VERSION" \
@@ -28,6 +31,7 @@ case "$OS_NAME" in
   *)  OS=unknown;;
 esac
 
+# Zip/Tar app.
 if [[ "$OS" == "windows" ]]; then
   ARCH_NAME="Luminara-${OS}-${RELEASE_VERSION}.zip"
   zip -r "$ARCH_NAME" Luminara
@@ -35,6 +39,7 @@ else
   ARCH_NAME="Luminara-${OS}-${RELEASE_VERSION}.tar.gz"
   tar -czf "$ARCH_NAME" Luminara
 fi
+
 
 echo "build_path=GUI/target/installer/$ARCH_NAME" >> $GITHUB_ENV
 echo "build_name=Luminara-${OS}-${RELEASE_VERSION}" >> $GITHUB_ENV
