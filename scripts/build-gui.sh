@@ -17,7 +17,7 @@ jpackage \
     --runtime-image GUI/target/LuminaraRuntime \
     --type app-image \
     --module luminara.gui/luminara_gui.RunApp \
-    --icon GUI/src/main/resources/Icons/Luminara-Main-Icon.ico \
+    --icon GUI/src/main/resources/Icons/Luminara-Main-Icon.png \
     --dest GUI/target/installer
 
 cd ./GUI/target/installer
