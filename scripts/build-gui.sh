@@ -6,7 +6,7 @@ RELEASE_VERSION=${1:-1.2.1}
 
 cd ..
 
-echo pwd
+pwd
 
 # build the JLink image
 mvn clean -pl gui javafx:jlink
