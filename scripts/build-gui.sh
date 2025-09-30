@@ -5,10 +5,10 @@ set -e
 RELEASE_VERSION=${1:-1.2.1}
 
 # Install moduals to local repo. 
-mvn install
+mvn clean install
 
 # Build the JLink image.
-mvn clean -pl GUI javafx:jlink
+mvn -pl GUI javafx:jlink
 
 # Package into an app.
 jpackage \
