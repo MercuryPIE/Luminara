@@ -42,7 +42,7 @@ esac
 # Zip/Tar app.
 if [[ "$OS" == "windows" ]]; then
   ARCH_NAME="Luminara-${OS}-${RELEASE_VERSION}.zip"
-  zip -r "$ARCH_NAME" "$APP_DIR"
+  pwsh -Command "Compress-Archive -Path $APP_DIR -DestinationPath Luminara-$OS-$RELEASE_VERSION.zip"
 else
   ARCH_NAME="Luminara-${OS}-${RELEASE_VERSION}.tar.gz"
   tar -czf "$ARCH_NAME" "$APP_DIR"
