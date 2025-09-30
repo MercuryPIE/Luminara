@@ -13,10 +13,10 @@ mvn -pl GUI javafx:jlink
 OS_NAME=$(uname -s)
 
 case "$OS_NAME" in
-  Linux*)   OS=linux; ICON="GUI/src/main/resources/Icons/Luminara-Main-Icon.png";;
-  Darwin*)  OS=macos; ICON="GUI/src/main/resources/Icons/Luminara-Main-Icon.icns";;
-  MINGW*|MSYS*|CYGWIN*) OS=windows; ICON="GUI/src/main/resources/Icons/Luminara-Main-Icon.ico";;
-  *)  OS=unknown; ICON="";;
+  Linux*)   OS=linux; ICON="GUI/src/main/resources/Icons/Luminara-Main-Icon.png"; MAC_ID="";;
+  Darwin*)  OS=macos; ICON="GUI/src/main/resources/Icons/Luminara-Main-Icon.icns"; MAC_ID="--mac-package-identifier com.win.bitforge.luminara";;
+  MINGW*|MSYS*|CYGWIN*) OS=windows; ICON="GUI/src/main/resources/Icons/Luminara-Main-Icon.ico"; MAC_ID="";;
+  *)  OS=unknown; ICON=""; MAC_ID="";;
 esac
 
 
@@ -30,7 +30,8 @@ jpackage \
     --type app-image \
     --module luminara.gui/luminara_gui.RunApp \
     --icon "$ICON" \
-    --dest GUI/target/installer
+    --dest GUI/target/installer \
+    $MAC_ID
 
 cd ./GUI/target/installer
 
