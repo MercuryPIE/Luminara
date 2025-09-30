@@ -17,9 +17,9 @@
     </properties>
 
     <modules>
-        <module>core</module>
-        <module>gui</module>
-        <module>cli</module>
+        <module>Core</module>
+        <module>GUI</module>
+        <module>CLI</module>
     </modules>
 
     <profiles>
