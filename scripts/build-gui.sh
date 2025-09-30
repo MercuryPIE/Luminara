@@ -5,7 +5,7 @@ set -e
 RELEASE_VERSION=${1:-1.2.1}
 
 # build the JLink image
-mvn clean -pl gui javafx:jlink
+mvn clean -pl GUI javafx:jlink
 
 # Package into an app
 jpackage \
