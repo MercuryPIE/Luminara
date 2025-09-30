@@ -14,7 +14,7 @@ OS_NAME=$(uname -s)
 
 case "$OS_NAME" in
   Linux*)   OS=linux; ICON="GUI/src/main/resources/Icons/Luminara-Main-Icon.png";;
-  Darwin*)  OS=macos; ICON="GUI/src/main/resources/Icons/Luminara-Main-Icon.png";;
+  Darwin*)  OS=macos; ICON="GUI/src/main/resources/Icons/Luminara-Main-Icon.icns";;
   MINGW*|MSYS*|CYGWIN*) OS=windows; ICON="GUI/src/main/resources/Icons/Luminara-Main-Icon.ico";;
   *)  OS=unknown; ICON="";;
 esac
