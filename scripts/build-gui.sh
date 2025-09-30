@@ -1,0 +1,42 @@
+#!/usr/bin/env bash
+
+set -e
+
+RELEASE_VERSION=${1:-1.2.1}
+
+cd ..
+
+# build the JLink image
+mvn clean -pl gui javafx:jlink
+
+# Package into an app
+jpackage \
+    --name Luminara \
+    --app-version "$RELEASE_VERSION" \
+    --runtime-image GUI/target/LuminaraRuntime \
+    --type app-image \
+    --module luminara.gui/luminara_gui.RunApp \
+    --icon GUI/src/main/resources/Icons/Luminara-Main-Icon.ico \
+    --dest GUI/target/installer
+
+cd ./GUI/target/installer
+
+OS_NAME=$(uname -s)
+
+case "$OS_NAME" in
+  Linux*)   OS=linux;;
+  Darwin*)  OS=macos;;
+  MINGW*|MSYS*|CYGWIN*) OS=windows;;
+  *)  OS=unknown;;
+esac
+
+if [[ "$OS" == "windows" ]]; then
+  ARCH_NAME="Luminara-${OS}-${RELEASE_VERSION}.zip"
+  zip -r "$ARCH_NAME" Luminara
+else
+  ARCH_NAME="Luminara-${OS}-${RELEASE_VERSION}.tar.gz"
+  tar -czf "$ARCH_NAME" Luminara
+fi
+
+echo "build_path=GUI/target/installer/$ARCH_NAME" >> $GITHUB_ENV
+echo "build_name=Luminara-${OS}-${RELEASE_VERSION}" >> $GITHUB_ENV

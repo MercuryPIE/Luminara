@@ -9,7 +9,12 @@ on:
         description: 'Version for release'
         required: true
         default: 'v0.0.1'
-        
+      tags:
+        description: 'Comma-separated list of tags to apply to the release'
+        required: true
+        default: 'untagged'
+
+
 jobs:
   gui-build:
     name: Build Luminara GUI for different operating systems
@@ -24,18 +29,21 @@ jobs:
         with:
           java-version: 25
           distribution: oracle
-          
-      - name: Build jlink runtime
-        run: mvn clean javafx:jlink # add the porfile for the cli when needed
 
-      - name: Create output folder
+      - name: Make build script executable
         shell: bash
-        run: mv target/app.zip target/Luminara-${{ matrix.os }}-${{ github.event.inputs.release_version }}.zip
-          
-      - uses: actions/upload-artifact@v4
+        run: chmod +x ./scripts/build-gui.sh
+
+      # This step should have the builds archived to the GUI/target/installer directory.
+      - name: Run build script
+        shell: bash
+        run: ./scripts/build.sh ${{ github.event.inputs.release_version }}
+
+      - name: Upload build artifact
+        uses: actions/upload-artifact@v4
         with:
-          name: Luminara-GUI-${{ matrix.os }}
-          path: target/Luminara-${{ matrix.os }}-${{ github.event.inputs.release_version }}.zip
+          name: ${{ env.build_name }}
+          path: ${{ env.build_path }}
 
   release-upload:
     name: Create release and upload the GUI artifacts
@@ -44,26 +52,26 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: Download GUI atrifacts
+      - name: Download GUI artifacts
         uses: actions/download-artifact@v4
         with:
           path: artifacts
-          
-      - name: Create release
+
+      - name: Create release object
         id: create_release
         uses: actions/create-release@v1
         with:
-          tag_name: ${{ github.event.inputs.release_version }}
+          tag_name: ${{ github.event.inputs.tags }}
           release_name: ${{ github.event.inputs.release_version }}
           draft: false
           prerelease: false
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-
-      - name: Upload GUI zips to release
+      - name: Upload gui archives to release
         uses: softprops/action-gh-release@v1
         with:
+#          body: << for the change log stuff.
           files: artifacts/**/*
           tag_name: ${{ github.event.inputs.release_version }}
         env:

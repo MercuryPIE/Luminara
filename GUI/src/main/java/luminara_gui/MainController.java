@@ -1,8 +1,9 @@
-package Luminara.GUI;
+package luminara_gui;
 
-import Luminara.Core.AppProperties;
-import Luminara.Core.Core;
-import Luminara.Core.PropertyManager;
+import javafx.scene.control.Alert;
+import luminara_core.properties.*;
+import luminara_core.Core;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -27,9 +28,8 @@ public class MainController {
     @FXML
     public void initialize(){
         SaveSettingsButton.setDisable(true);
-        VersionLabel.setText(AppProperties.get(PropertyManager.APP_VERSION));
+        VersionLabel.setText(AppProperties.get("APP_VERSION"));
     }
-
 
 
     @FXML
@@ -46,19 +46,22 @@ public class MainController {
         }
     }
 
-
     @FXML
     private void HandleSaveFile(){
         FileChooser FC = new FileChooser();
-        FC.setInitialFileName("output");
+
+        String InitialFN = AppProperties.get("DEFAULT_FILE_NAME");
+
+
+        FC.setInitialFileName(InitialFN);
         FC.getExtensionFilters().add(new FileChooser.ExtensionFilter("PNG Image", "*.png"));
         Stage stage = (Stage) SelectFileButton.getScene().getWindow();
+
         File SaveLocation = FC.showSaveDialog(stage);
 
         if (SaveLocation != null){
             try{
-                int ExitCode = Core.ReadFile(ExtractFile, SaveLocation);
-                System.out.println(ExitCode);
+                Core.ReadFile(ExtractFile, SaveLocation);
 
                 ExtractFile = null;
                 ConvertFileButton.setDisable(true);
@@ -67,5 +70,13 @@ public class MainController {
                 throw new RuntimeException(e);
             }
         }
+    }
+
+    private static void DisplayAlert(){
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("File To Small");
+        alert.setHeaderText("The File is Too small");
+        alert.setContentText("the file you have selected is too small, please select a file larger");
+        alert.showAndWait();
     }
 }

@@ -1,0 +1,2 @@
+module luminara.console {
+}

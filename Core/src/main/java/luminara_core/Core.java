@@ -1,6 +1,7 @@
-package Luminara.Core;
+package luminara_core;
 
-import javafx.scene.control.Alert;
+import luminara_core.error.FileSizeToSmall;
+import luminara_core.properties.AppProperties;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
@@ -12,28 +13,21 @@ import java.nio.file.Files;
 public class Core {
 
     /// Reads the selected file into the binary file buffer.
-    public static int ReadFile(File FileData, File SaveLocation) throws IOException {
+    public static void ReadFile(File FileData, File SaveLocation) throws IOException {
         byte[] FileContent = Files.readAllBytes(FileData.toPath());
         int FileSize = FileContent.length;
 
         if (FileSize == 0){
-            System.out.println("File is too small, please select another file.");
-            DisplayAlert();
-            return 1;
+            throw new FileSizeToSmall("File is to small.");
         }
 
         int[] ImageDimensions = GetImageSizes(FileSize);
-
-        System.out.println(VideoManager.CalculateVideoLength(ImageDimensions, 30, 16));
-
         BufferedImage FileImage = getBufferedImage(ImageDimensions, FileSize, FileContent);
 
         // Append the File extension to the end of the save location.
 
-        String FileExt = AppProperties.get(PropertyManager.DEFAULT_FILE_FORMAT);
-
+        String FileExt = AppProperties.get("DEFAULT_FILE_FORMAT");
         ImageIO.write(FileImage, FileExt, SaveLocation);
-        return 0;
     }
 
 
@@ -74,13 +68,6 @@ public class Core {
         return new int[]{ImageWidth, ImageHeight};
     }
 
-    private static void DisplayAlert(){
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("File To Small");
-        alert.setHeaderText("The File is Too small");
-        alert.setContentText("the file you have selected is too small, please select a file larger");
-        alert.showAndWait();
-    }
 
     public static byte[] ExtractFile(File FileData) throws IOException {
         byte[] FileContent = Files.readAllBytes(FileData.toPath());

@@ -1,12 +1,12 @@
-package Luminara.GUI;
+package luminara_gui;
 
-import Luminara.Core.AppProperties;
-import Luminara.Core.PropertyManager;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
+
+import luminara_core.properties.AppProperties;
 
 import java.io.IOException;
 import java.util.Objects;
@@ -15,17 +15,16 @@ public class RunApp extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-
-        FXMLLoader root = new FXMLLoader(RunApp.class.getResource("hello-view.fxml"));
+        FXMLLoader root = new FXMLLoader(RunApp.class.getResource("/hello-view.fxml"));
         Scene scene = new Scene(root.load(), 700, 400); // width: 700, height: 400.
 
-        scene.getStylesheets().add(Objects.requireNonNull(RunApp.class.getResource("Themes/Dark-Theme.css")).toExternalForm());
-        stage.getIcons().add(new Image(Objects.requireNonNull(RunApp.class.getResourceAsStream("Icons/Luminara-Main-Icon.png"))));
+        scene.getStylesheets().add(Objects.requireNonNull(RunApp.class.getResource("/Themes/Dark-Theme.css")).toExternalForm());
+        stage.getIcons().add(new Image(Objects.requireNonNull(RunApp.class.getResourceAsStream("/Icons/Luminara-Main-Icon.png"))));
 
         stage.setMinWidth(460);
         stage.setMinHeight(340);
 
-        stage.setTitle("Luminara " + AppProperties.get(PropertyManager.APP_VERSION));
+        stage.setTitle("Luminara " + AppProperties.get("APP_VERSION"));
         stage.setScene(scene);
 
         stage.show();
